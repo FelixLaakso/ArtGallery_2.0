@@ -1,10 +1,11 @@
-header {
-    width: 100vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+a {
+    cursor: pointer;
 }
 
-.navbar-buttons {
-    
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
 }
