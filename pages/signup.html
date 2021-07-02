@@ -4,11 +4,13 @@
       <input type="username" class="form-control" id="username" placeholder="Username">
     </div>
     <div class="mb-3">
-      <input type="email" class="form-control" id="email" placeholder="E-mail">
+      <input type="email" class="form-control" id="email" placeholder="E-mail" onkeyup="checkInput(this);">
+      <p id="emailRegexMessage"></p>
     </div>
     <div class="mb-3">
-      <input type="password" class="form-control" id="password" placeholder="Password">
+      <input type="password" class="form-control" id="password" placeholder="Password" onkeyup="checkInput(this);">
+      <p id="passwordRegexMessage"></p>
     </div>
-    <button type="submit" class="btn btn-primary w-100">Sign up</button>
+    <button type="submit" class="btn btn-primary w-100" id="signup">Sign up</button>
   </form>
 </div>
