@@ -1,13 +1,15 @@
 <div class="shadow-lg p-3 mb-5 bg-body rounded">
   <div class="mb-3">
-    <input type="username" class="form-control" id="username" placeholder="Username">
+    <input type="username" class="form-control" id="signupUsername" placeholder="Username" onkeyup="checkInput('signupUsername');">
+    <p id="usernameMessage"></p>
   </div>
   <div class="mb-3">
-    <input type="email" class="form-control" id="email" placeholder="E-mail">
+    <input type="email" class="form-control" id="signupEmail" placeholder="E-mail" onkeyup="checkInput('signupEmail');">
+    <p id="emailMessage"></p>
   </div>
   <div class="mb-3">
-    <input type="password" class="form-control" id="password" placeholder="Password" onkeyup="checkInput(this);">
-    <p id="passwordRegexMessage"></p>
+    <input type="password" class="form-control" id="signupPassword" placeholder="Password" onkeyup="checkInput('signupPassword');">
+    <p id="passwordMessage"></p>
   </div>
-  <div class="btn btn-primary w-100" onclick="checkInput('submit');">Sign up</div>
+  <div class="btn btn-primary w-100" onclick="submitForm('signup');">Sign up</div>
 </div>

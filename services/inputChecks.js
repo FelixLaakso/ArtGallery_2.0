@@ -1,50 +1,68 @@
 const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
 const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-function checkInput(check) {
-    if (check === 'submit') {
+function checkInput(formType) {
+    if (formType === 'signup') {
         let checkedUsername = false, checkedEmail = false, checkedPassword = false;
-        let username = document.getElementById('username').value;
-        let email = document.getElementById('email').value;
-        let password = document.getElementById('password').value;
+        let username = document.getElementById('signupUsername').value;
+        let email = document.getElementById('signupEmail').value;
+        let password = document.getElementById('signupPassword').value;
 
         if (username !== '') {
             checkedUsername = true;
         }
 
         if (email.match(emailRegex)) {
+            
             checkedEmail = true;
         }
             
         if (!password.match(passwordRegex)) {
-            document.getElementById("passwordRegexMessage").innerHTML = "Something is wrong!";
-            document.getElementById("passwordRegexMessage").style.color = "red";
+            document.getElementById("passwordMessage").innerHTML = "Something is wrong!";
+            document.getElementById("passwordMessage").style.color = "red";
         } else {
-            document.getElementById("passwordRegexMessage").innerHTML = "";
+            document.getElementById("passwordMessage").innerHTML = "";
             checkedPassword = true;
         }
 
         if (checkedUsername && checkedEmail && checkedPassword) {
-            let data = {
-                username: username,
-                email: email,
-                password: password
+            return 'OK';
+        } else {
+            let response = {
+                checkedUsername: checkedUsername,
+                checkedEmail: checkedEmail,
+                checkedPassword: checkedPassword
             }
-            getData('signup', JSON.stringify(data));
-            changePage('home');
+
+            return response;
         }
     } else {
-        switch (check.type) {
-            case 'password':
-                if (!check.value.match(passwordRegex)) {
-                    document.getElementById("passwordRegexMessage").innerHTML = "Something is wrong!";
-                    document.getElementById("passwordRegexMessage").style.color = "red";
-                } else {
-                    document.getElementById("passwordRegexMessage").innerHTML = "";
-                }
-                break;
-            default:
-                break;
+        /* TODO: Clean up */
+        let errorMessage;
+        if (formType === 'signupUsername') {
+            errorMessage = document.getElementById('usernameMessage');
+            if (document.getElementById(formType).value === '') {
+                errorMessage.innerHTML = "Something is wrong!";
+                errorMessage.style.color = "red";
+            } else {
+                errorMessage.innerHTML = "";
+            }
+        } else if (formType === 'signupEmail') {
+            errorMessage = document.getElementById('emailMessage');
+            if (!document.getElementById(formType).value.match(emailRegex)) {
+                errorMessage.innerHTML = "Something is wrong!";
+                errorMessage.style.color = "red";
+            } else {
+                errorMessage.innerHTML = "";
+            }
+        } else if (formType === 'signupPassword') {
+            errorMessage = document.getElementById('passwordMessage');
+            if (!document.getElementById(formType).value.match(passwordRegex)) {
+                errorMessage.innerHTML = "Something is wrong!";
+                errorMessage.style.color = "red";
+            } else {
+                errorMessage.innerHTML = "";
+            }
         }
     }
 }

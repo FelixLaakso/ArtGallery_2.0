@@ -1,12 +1,29 @@
 function getData (transactionType, data) {
+    let method;
+    if (transactionType === 'signup') {
+        method = 'post';
+    } else if (transactionType === 'signin') {
+        method = 'get';
+    }
+
+    let transactionInfo = {
+        type: transactionType,
+        method: method,
+    }
+
     $.ajax({
-        type: "Post",
+        type: method,
         url: "services/databaseConnection.php",
-        data: {transactionType: transactionType, data: data},
+        data: {transactionType: JSON.stringify(transactionInfo), data: JSON.stringify(data)},
         dataType: "json",
         success: function (response) {
-            if (response.return === 'success') {
-                return response.return;
+            console.log(transactionType);
+            if (transactionType == 'signup') {
+                changePage('home');
+            } else if (transactionType == 'signin') {
+                let username = sessionStorage.setItem('userInfo', response);
+                document.getElementById("loginContainer").innerHTML = "<p>" + username + "</p>";
+                changePage('home');
             }
         },
         error: function (xhr, exception) {
@@ -26,7 +43,7 @@ function getData (transactionType, data) {
             } else {
                 msg = "Error:" + xhr.status + " " + xhr.responseText;
             }
-           console.error(msg);
+            console.error(msg);
         }
     }); 
 

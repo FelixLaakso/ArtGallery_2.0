@@ -1,15 +1,5 @@
-<div class="shadow-lg p-3 mb-5 bg-body rounded">
-  <p>You have to be logged in and verified to upload!</p>
-  <form class="px-4 py-3">
-    <div class="mb-3">
-      <input type="email" class="form-control" id="exampleDropdownFormEmail1" placeholder="E-mail">
-    </div>
-    <div class="mb-3">
-      <input type="password" class="form-control" id="exampleDropdownFormPassword1" placeholder="Password">
-    </div>
-    <button type="submit" class="btn btn-primary w-100">Sign in</button>
-  </form>
-  <div class="dropdown-divider"></div>
-  <a class="dropdown-item" onclick="changePage('signup');">New around here? Sign up</a>
-  <a class="dropdown-item" href="#">Forgot password?</a>
-</div>
+<script>
+  if (session === true) {
+    changePage('signin');
+  }
+</script>

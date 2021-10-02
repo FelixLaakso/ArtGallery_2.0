@@ -18,7 +18,9 @@
     if ($queryResult = $connection->query($query)) {
         if ($_POST['transactionType'] == 'signup') {
             $return = 'success';
-            echo json_encode($return);
+        } else if ($_POST['transactionType'] == 'signin'){
+            $return = $queryResult['username'];
         }
+        echo json_encode($return);
     }
 ?>
